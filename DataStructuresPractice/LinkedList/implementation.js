@@ -27,7 +27,6 @@ class LinkedList {
       this.tail = node;
     }
     this.size++;
-    return;
   }
   prepend(value) {
     const node = new Node(value);
@@ -39,16 +38,33 @@ class LinkedList {
       this.head = node;
     }
     this.size++;
-    return;
   }
-  removeFromFront() {
+  insert(index, value) {
+    if (index > this.size || index < 0) {
+      return -1;
+    }
+    const node = new Node(value);
+    if (index === 0) {
+      return this.prepend(value);
+    } else {
+      let prev = this.head;
+      let i;
+      for (i = 0; i < index - 1; i++) {
+        prev = prev.next;
+      }
+      node.next = prev.next.next;
+      prev.next = node;
+    }
+    this.size++;
+  }
+  removeFromStart() {
     if (this.isEmpty()) {
       return null;
     }
-    const head = this.head;
-    this.head = head.next;
+    const value = this.head.value;
+    this.head = this.head.next;
     this.size--;
-    return head.value;
+    return value;
   }
   removeFromEnd() {
     if (this.isEmpty()) {
@@ -56,9 +72,8 @@ class LinkedList {
     }
     const value = this.tail.value;
     if (this.size === 1) {
-      this.head = null;
       this.tail = null;
-      this.size--;
+      this.head = null;
     } else {
       let prev = this.head;
       while (prev.next !== this.tail) {
@@ -66,37 +81,13 @@ class LinkedList {
       }
       prev.next = null;
       this.tail = prev;
-      this.size--;
-      return value;
     }
+    this.size--;
+    return value;
   }
-  print() {
-    if (this.isEmpty()) {
-      console.log("List is Empty");
-    }
-    let str = "";
-    let curr = this.head;
-    while (curr) {
-      str += curr.value + " ";
-      curr = curr.next;
-    }
-    console.log(str);
-  }
+  removeVal(value) {}
+  removeFromIndex(index) {}
+  print() {}
 }
 
-module.exports = LinkedList;
-
-// const list = new LinkedList();
-
-// list.append(20);
-// list.append(30);
-// list.append(40);
-// list.prepend(10);
-// list.removeFromFront();
-// list.removeFromFront();
-// list.removeFromFront();
-// list.removeFromFront();
-// list.removeFromEnd();
-// list.removeFromEnd();
-// list.removeFromEnd();
-// list.print();
+const list = new LinkedList();
