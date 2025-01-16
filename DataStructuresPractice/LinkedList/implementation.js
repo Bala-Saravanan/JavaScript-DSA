@@ -52,7 +52,7 @@ class LinkedList {
       for (i = 0; i < index - 1; i++) {
         prev = prev.next;
       }
-      node.next = prev.next.next;
+      node.next = prev.next;
       prev.next = node;
     }
     this.size++;
@@ -85,9 +85,94 @@ class LinkedList {
     this.size--;
     return value;
   }
-  removeVal(value) {}
-  removeFromIndex(index) {}
-  print() {}
+  removeVal(value) {
+    if (value === this.head.value) {
+      return this.removeFromStart();
+    } else if (value === this.tail.value) {
+      return this.removeFromEnd();
+    } else {
+      let curr = this.head;
+      while (curr.next !== null) {
+        if (curr.next.value === value) {
+          break;
+        }
+        curr = curr.next;
+      }
+      curr.next = curr.next.next;
+      this.size--;
+    }
+
+    return value;
+  }
+  removeFromIndex(index) {
+    if (index < 0 || index >= this.size) {
+      return null;
+    }
+    if (index === 0) {
+      return this.removeFromStart();
+    }
+    if (index === this.size - 1) {
+      return this.removeFromEnd();
+    }
+    let prev = this.head;
+    let count = 0;
+    while (prev) {
+      if (count === index - 1) {
+        break;
+      }
+      prev = prev.next;
+      count++;
+    }
+    const value = prev.next.value;
+    prev.next = prev.next.next;
+    prev = prev.next;
+    this.size--;
+    return value;
+  }
+  clear() {
+    this.head = null;
+    this.tail = null;
+    this.size = 0;
+  }
+  print() {
+    if (this.isEmpty()) {
+      console.log("List is Empty");
+    }
+    let listValues = "";
+    let prev = this.head;
+    while (prev) {
+      listValues += prev.value + " -> ";
+      prev = prev.next;
+    }
+    console.log(listValues);
+  }
 }
 
-const list = new LinkedList();
+module.exports = LinkedList;
+
+// const list = new LinkedList();
+
+// list.append(10);
+// list.print();
+// list.append(20);
+// list.print();
+// list.append(30);
+// list.print();
+// list.prepend(5);
+// list.print();
+// list.prepend(0);
+// list.print();
+// list.insert(3, 15);
+// list.print();
+// list.removeFromEnd();
+// list.print();
+// list.removeFromStart();
+// list.print();
+// list.removeVal(15);
+// list.print();
+// list.removeFromIndex(2);
+// list.print();
+// console.log(list.size);
+
+// list.clear();
+// list.print();
