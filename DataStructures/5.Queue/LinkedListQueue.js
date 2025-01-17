@@ -27,26 +27,28 @@ class Queue {
   }
 }
 
-const queue = new Queue();
+module.exports = Queue;
 
-console.log(queue.isEmpty());
+// const queue = new Queue();
 
-queue.enqueue(10);
-queue.print();
-queue.enqueue(20);
-queue.print();
-queue.enqueue(30);
-queue.print();
-queue.enqueue(40);
-queue.print();
-queue.dequeue();
-queue.print();
+// console.log(queue.isEmpty());
 
-console.log(queue.peek());
+// queue.enqueue(10);
+// queue.print();
+// queue.enqueue(20);
+// queue.print();
+// queue.enqueue(30);
+// queue.print();
+// queue.enqueue(40);
+// queue.print();
+// queue.dequeue();
+// queue.print();
 
-queue.dequeue();
-queue.print();
-queue.dequeue();
-queue.print();
-queue.dequeue();
-queue.print();
+// console.log(queue.peek());
+
+// queue.dequeue();
+// queue.print();
+// queue.dequeue();
+// queue.print();
+// queue.dequeue();
+// queue.print();
